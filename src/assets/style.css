@@ -1,0 +1,130 @@
+#app {
+  text-align: center;
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+.bg-primary {
+  background-color: #00BBF9;
+}
+
+.bg-secondary {
+  background-color: #FEE440;
+}
+
+.bg-alternative {
+  background-color: #111111;
+}
+
+.loader {
+  margin: auto;
+  display: block;
+  width: 220px;
+  height: 140px;
+  background: #979794;
+  box-sizing: border-box;
+  position: relative;
+  border-radius:6px;
+  perspective: 500px;
+}
+
+.loader:before{
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 10px;
+  bottom: 10px;
+  border-radius:8px;
+  background: #f5f5f5  no-repeat;
+  background-size: 70px 10px;
+  background-image: 	linear-gradient(#ddd 100px, transparent 0) ,
+            linear-gradient(#ddd 100px, transparent 0), 
+            linear-gradient(#ddd 100px, transparent 0);
+  background-position: 15px 30px , 15px 60px , 15px 90px, 
+            105px 30px , 105px 60px , 105px 90px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
+.loader:after, .bg-page {
+  content: '';
+  position: absolute;
+  width: calc(50% - 10px);
+  right: 10px;
+  top: 10px;
+  bottom: 10px;
+  border-radius: 8px;
+  background: #fff no-repeat;
+  background-size: 70px 10px;
+  background-image: linear-gradient(#ddd 100px, transparent 0), 
+          linear-gradient(#ddd 100px, transparent 0), 
+          linear-gradient(#ddd 100px, transparent 0);
+  background-position: 50% 30px ,50% 60px , 50%  90px;
+
+
+}
+
+.loader:after {
+  animation: paging 1s linear infinite;
+  transform: rotateY(0deg );
+  transform-origin: left center;
+}
+
+@keyframes paging {
+  to {
+    transform: rotateY( -180deg );
+  }
+}
+
+.scroll-direction {
+  margin: 10px auto auto auto;
+  display: none;
+  width: 78px;
+  height: 38px;
+  box-sizing: border-box;
+  border: 2px solid #a6a6a6;
+  position: relative;
+  border-radius: 25% 25% 25% 25% / 50% 50% 50% 50%;
+}
+
+.scroll-direction::before {
+  content: '';
+  position: absolute;
+  top: 33%;
+  width: 10px;
+  height: 10px;
+  background: #a6a6a6;
+  border-radius: 50%;
+  animation: fadeDown 1.4s ease-out infinite;
+}
+
+@keyframes fadeDown {
+  0% {
+    left: 0%;
+    opacity: 1;
+  }
+  100% {
+    left: 60%;
+    opacity: 0;
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+  .scroll-direction {
+    display: block;
+  }
+  [class*="col-"] {
+    width: 100%;
+  }
+}
