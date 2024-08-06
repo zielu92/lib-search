@@ -1,14 +1,19 @@
 <template>
     <div class="card" @click="toggleInfo">
-      <img :src="coverUrl()" :alt="book.title" class="card-image">
+      <img :src="coverImageUrl" :alt="book.title" class="card-image">
       <div class="card-info" :class="{ show: showInfo }">
         <div class="card-info-content">
-          <p class="title">{{ getTitle() }}</p>
+          <p class="title"><strong>{{ getTitle() }}</strong></p>
           <div v-if="book.author_name" class="author">
-            <p class="more-info" v-for="(author, index) in book.author_name" :key="index">{{ author }}</p>
+            <span class="more-info">{{ book.author_name[0] }}</span>
           </div>
-          <p class="more-info">Year: {{ book.first_publish_year }}</p>
-          <button @click="showDetails">Details</button>
+          <span class="more-info" v-if="book.first_publish_year">
+            <strong>Year:</strong> {{ book.first_publish_year }}
+          </span>
+          <span class="more-info" v-if="book.isbn">
+            <strong>ISBM:</strong> {{ book.isbn[0] }}
+          </span>
+          <button @click="showDetails" class="bg-primary btn-pr">Details</button>
           <button @click="addToWishlist" class="toWishList">♥</button>
         </div>
       </div>
@@ -20,11 +25,12 @@
   import Component from 'vue-class-component';
   import { Prop } from 'vue-property-decorator';
   import { Book } from '@/types/Book';
+  import { coverURL } from '@/helpers/helper';
   
   @Component
   export default class BookCard extends Vue {
     @Prop() book!: Book;
-  
+
     showInfo = false;
 
     toggleInfo(): void {
@@ -46,19 +52,15 @@
     addToWishlist(): void {
       this.$store.dispatch('wishlist/toggleWishlistItem', this.book);
     }
-  
-    showDetails(): void {
-      alert(`Details:
-        Title: ${this.book.title}
-        Author: ${this.book.author_name}
-        Year: ${this.book.first_publish_year}`);
+
+    showDetails(): any {
+      this.$emit('show-details', this.book);
     }
      
-    coverUrl(): string {
-      return this.book.cover_i
-        ? `https://covers.openlibrary.org/b/id/${this.book.cover_i}-M.jpg`
-        : `https://placehold.co/350?text=${this.getTitle()}`;
-  }
+    get coverImageUrl(): string {
+      return coverURL(this.book.cover_i, this.getTitle());
+    }
+
 }
   </script>
   
@@ -116,13 +118,13 @@
     margin: 10px 0;
   }
 
-  .card-info .more-info, .card-info button {
+  .card-info .more-info, .card-info button, .card-info a {
     display: none;
-    transition: opacity .3s ease-out;
+    transition: opacity .6s ease-out;
   }
 
-  .author > .more-info {
-    margin:0;
+  .more-info {
+    margin-bottom:10px;
   }
 
   .card:hover .card-info .more-info,
@@ -132,26 +134,11 @@
     display: block;
   }
 
-  .card-info button {
-    margin: 10px 5px;
-    padding: 10px 20px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-
-  .card-info button:hover {
-    background-color: #0056b3;
-  }
-
   .toWishList{
     float: right;
     position: absolute;
-    right: 0;
-    bottom: 0;
+    right: 5px;
+    top: 5px;
   }
 </style>
   

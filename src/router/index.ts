@@ -13,8 +13,9 @@ const routes: Array<RouteConfig> = [
     path: '/wishlist',
     name: 'Wishlist',
     component: () => import('../views/Wishlist.vue')
-  }
+  },
 ]
+
 
 const router = new VueRouter({
   mode: 'history',
