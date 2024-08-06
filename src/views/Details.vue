@@ -10,7 +10,7 @@
             <h1>{{ book.title }}</h1>
             <p v-if="book.author_name">Author: {{ book.author_name.join(', ') }}</p>
             <p v-if="book.author_alternative_name && book.author_alternative_name.length">
-                Alternative Names: {{ book.author_alternative_name.join(', ') }}</p>
+               Author alternative names: {{ book.author_alternative_name.join(', ') }}</p>
             <p v-if="book.first_publish_year">First Published: {{ book.first_publish_year }}</p>
             <p v-if="book.isbn && book.isbn.length">ISBN: {{ book.isbn.join(', ') }}</p>
         </div>
@@ -41,19 +41,22 @@
   .book-container {
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 10px;
     margin-top: 70px;
+    background-color: #61a4e79f;
+    border-radius: 20px;
   }
   
   .book-cover img {
+    border-radius: 20px;
     max-width: 200px;
     max-height: 300px;
+    padding: 10px;
   }
   
   .book-details {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 20px;
+    margin: 0 auto;
   }
   
   @media (max-width: 768px) {
@@ -62,9 +65,6 @@
       align-items: center;
     }
   
-    .book-cover img {
-      margin-bottom: 20px;
-    }
   }
   </style>
   

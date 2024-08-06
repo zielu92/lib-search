@@ -26,11 +26,19 @@
   })
   export default class BooksContainer extends Vue {
     @Prop() books!: Book[];
-  
+    savedScrollPosition: number = 0;
     show: Book | null = null;
   
     showDetails(book: Book): void {
-      this.show = book;
+        if (!this.show) {
+            this.savedScrollPosition = window.scrollY;
+            window.scrollTo(0, 0);
+        } else {
+            this.$nextTick(() => {
+                window.scrollTo(0, this.savedScrollPosition);
+            });
+        }
+        this.show = book;
     }
   
     mounted() {
@@ -38,7 +46,11 @@
     }
   
     clearShow(): void {
-      this.show = null;
+        console.log("called");
+        this.show = null;
+        this.$nextTick(() => {
+            window.scrollTo(0, this.savedScrollPosition);
+        });
     }
   }
   </script>
