@@ -2,9 +2,9 @@
   <div class="book-search">
     <div class="inline">
       <form @submit.prevent="searchBooks">
-        <input v-model="title" :class="{ invalid: !isTitleValid && title.trim().length }" type="text" placeholder="Book title" />
-        <input v-model="author" :class="{ invalid: !isAuthorValid && author.trim().length }" type="text" placeholder="Author name" />
-        <input v-model="isbn" :class="{ invalid: !isIsbnValid && isbn.trim().length }" type="text" placeholder="ISBN" />
+        <input v-model="title" :class="{ invalid: !isTitleValid && !checkInputs }" type="text" placeholder="Book title" />
+        <input v-model="author" :class="{ invalid: !isAuthorValid && !checkInputs }" type="text" placeholder="Author name" />
+        <input v-model="isbn" :class="{ invalid: !isIsbnValid && !checkInputs }" type="text" placeholder="ISBN" />
         <button type="submit" class="bg-primary btn-pr br">Search</button>
       </form>
       <router-link to="/wishlist" class="bg-primary btn-pr btn-wishlist btn-link br">
@@ -114,6 +114,10 @@ export default class BookSearch extends Vue {
     }
   }
 
+  checkInputs(): boolean {
+    return this.isbn.trim().length !== 0 && this.author.trim().length !== 0 && this.title.trim().length !== 0;
+  }
+
   cleanInputs(): void {
     this.title = '';
     this.author = '';
@@ -140,7 +144,7 @@ export default class BookSearch extends Vue {
 .inline form {
   display: flex;
   gap: 5px;
-  width: 80%;
+  width: 90%;
   transition: width 0.3s ease;
 }
 
@@ -150,7 +154,7 @@ export default class BookSearch extends Vue {
 
 .inline form:hover + .btn-wishlist {
   display: none;
-  transition: width 0.3s ease-out;
+  transition: width 0.3s ease-in-out;
 }
 
 .book-search input {

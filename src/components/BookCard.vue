@@ -14,7 +14,9 @@
             <strong>ISBM:</strong> {{ book.isbn[0] }}
           </span>
           <button @click="showDetails" class="bg-primary btn-pr">Details</button>
-          <button @click="addToWishlist" class="toWishList">♥</button>
+          <button @click.stop="addToWishlist" 
+          :class="{'isAdded': isInWishlist}" 
+          class="toWishList br">♥</button>
         </div>
       </div>
     </div>
@@ -51,6 +53,10 @@
 
     addToWishlist(): void {
       this.$store.dispatch('wishlist/toggleWishlistItem', this.book);
+    }
+
+    get isInWishlist(): boolean {
+      return this.$store.getters['wishlist/isInWishlist'](this.book.key);
     }
 
     showDetails(): any {
@@ -139,6 +145,14 @@
     position: absolute;
     right: 5px;
     top: 5px;
+    padding: 6px;
+    background-color: #64afd0;
+    color: #fff;
+    border: none;
+  }
+
+  .isAdded {
+    color: #ea2b2b;
   }
 </style>
   

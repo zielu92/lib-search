@@ -53,6 +53,7 @@ input {
 
 .bg-primary:hover {
   background-color: #2d648e;
+  box-shadow: none;
 }
 
 .bg-secondary {
@@ -173,3 +174,7 @@ input {
   }
 }
 
+body{
+  background: #0959a9;
+  color: #f9f9f9;
+}

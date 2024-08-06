@@ -4,7 +4,7 @@
       <div class="clearfix"></div>
       <div class="book-container">
         <div class="book-cover">
-            <img :src="coverImageUrl" alt="Book Cover" v-if="book.cover_i" />
+            <img :src="coverImageUrl" alt="Book Cover"/>
         </div>
         <div class="book-details">
             <h1>{{ book.title }}</h1>
