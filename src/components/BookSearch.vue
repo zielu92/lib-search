@@ -111,7 +111,6 @@ export default class BookSearch extends Vue {
       try {
         const response = await axios.get(`https://openlibrary.org/search.json?${queryString}`);
         this.books = response.data.docs;
-        console.log(response.data);
         this.numFound = response.data.numFound;
         if (this.books.length === 0) {
           this.isEmpty = true;
@@ -141,7 +140,6 @@ export default class BookSearch extends Vue {
 
   displaySingleBook(book: Book | null): void {
     this.hidePagination = book != null;
-    console.log(this.hidePagination);
   }
 
   prevPage(): void {
