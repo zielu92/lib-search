@@ -1,6 +1,6 @@
 <template>
     <div class="card" @click="toggleInfo">
-      <img :src="coverImageUrl" :alt="book.title" class="card-image">
+      <img v-lazy="coverImageUrl" :alt="book.title" class="card-image">
       <div class="card-info" :class="{ show: showInfo }">
         <div class="card-info-content">
           <p class="title"><strong>{{ getTitle() }}</strong></p>
@@ -32,7 +32,7 @@
   @Component
   export default class BookCard extends Vue {
     @Prop() book!: Book;
-
+    loading = true;
     showInfo = false;
 
     toggleInfo(): void {
