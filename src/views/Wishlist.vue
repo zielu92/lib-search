@@ -1,10 +1,10 @@
 <template>
     <div class="wishlist">
       <h1>Wishlist</h1>
-      <router-link to="/" class="bg-primary btn-pr btn-back btn-link br">
-        &lt; Back
+      <router-link to="/" class="bg-primary btn-pr btn-back btn-link">
+        &lt; Search
       </router-link>
-      <button  class="bg-primary btn-pr btn-back">Export to CSV</button>
+      <button @click="exportCSV" class="bg-primary btn-pr btn-export">Export to CSV</button>
       <div class="clearfix"></div>
       <books-container v-if="wishlist.length" :books="wishlist"/>
     </div>
@@ -16,27 +16,35 @@
   import { Book } from '@/types/Book';
   import BookCard from '@/components/BookCard.vue';
   import BooksContainer from '@/components/BooksContainer.vue';
+  import { convertToCSV } from '@/helpers/convertCSV'
   @Component({
     components: { BookCard, BooksContainer }
   })
   export default class Wishlist extends Vue {
     get wishlist(): Book[] {
       return this.$store.getters['wishlist/wishlist'];
-    }
+    };
 
-    export(): void {
-        console.log("ok");
-    }
+    exportCSV(): void {
+      const csvData = convertToCSV(this.wishlist);
+      const blob = new Blob([csvData], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('hidden', '');
+      a.setAttribute('href', url);
+      a.setAttribute('download', 'wishlist.csv');
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    };
 
   }
   </script>
   
   <style scoped>
-  .card-grid {
-    margin-top: 70px;
+  .btn-export {
+    padding: 15px
   }
-  .wishlist {
-    padding: 20px;
-  }
+  
   </style>
   

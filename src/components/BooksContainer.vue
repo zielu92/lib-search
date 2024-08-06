@@ -9,7 +9,7 @@
         />
       </div>
       <book-details v-else :book="show" @show-details="showDetails"/>
-      <span class="scroll-direction" v-if="books.length > 2"></span>
+      <span class="scroll-direction" v-if="books.length > 2 && !show"></span>
     </div>
   </template>
   
@@ -44,8 +44,8 @@
   </script>
   
   <style scoped>
-  .card-grid {
-    margin-top: 70px;
+  .BooksContainer {
+    margin-top: 20px;
   }
   .wishlist {
     padding: 20px;
