@@ -39,6 +39,7 @@
             });
         }
         this.show = book;
+        this.$emit('show', this.show);
     }
   
     mounted() {
@@ -46,7 +47,6 @@
     }
   
     clearShow(): void {
-        console.log("called");
         this.show = null;
         this.$nextTick(() => {
             window.scrollTo(0, this.savedScrollPosition);

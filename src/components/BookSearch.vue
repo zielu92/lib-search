@@ -18,9 +18,16 @@
       Failed to fetch books. Please try again.
     </info-alert>
     <span class="loader" v-if="isLoading"></span>
-    <books-container v-if="books.length" :books="books"/>
+    <books-container v-if="books.length" :books="books" @show="displaySingleBook"/>
+
+    <div v-if="books.length && !hidePagination" class="pagination">
+      <button class="bg-primary" @click="prevPage" :disabled="page === 1">Previous</button>
+      <span>Page {{ page }}</span>
+      <button class="bg-primary" @click="nextPage" :disabled="page >= totalPages">Next</button>
+    </div>
   </div>
 </template>
+
 
 <script lang="ts">
 import Vue from 'vue';
@@ -46,13 +53,19 @@ export default class BookSearch extends Vue {
   books: Book[] = [];
   wishlist: Book[] = [];
   error: boolean = false;
-
+  hidePagination: boolean = false;
   isTitleValid: boolean = true;
   isAuthorValid: boolean = true;
   isIsbnValid: boolean = true;
 
-  async searchBooks(): Promise<void> { 
-    // Set up for validation
+  page: number = 1;
+  numFound: number = 0;
+
+  get totalPages(): number {
+    return Math.ceil(this.numFound / 100);
+  }
+
+  async searchBooks(): Promise<void> {
     const titleValidatable: Validatable = {
       value: this.title,
       minLength: 2
@@ -66,8 +79,7 @@ export default class BookSearch extends Vue {
       minLength: 8,
       maxLength: 13
     };
-    
-    // Validate
+
     this.isTitleValid = validate(titleValidatable);
     this.isAuthorValid = validate(authorValidatable);
     this.isIsbnValid = validate(isbnValidatable);
@@ -76,19 +88,18 @@ export default class BookSearch extends Vue {
     this.error = false;
     const query = [];
 
-    // Create a query
     if (this.isTitleValid) query.push(`title=${this.title}`);
     if (this.isAuthorValid) query.push(`author=${this.author}`);
     if (this.isIsbnValid) query.push(`isbn=${this.isbn}`);
-    
-    if(query.length > 0) {
+
+    if (query.length > 0) {
+      this.books = [];
       this.isLoading = true;
+      query.push(`page=${this.page}`);
       const queryString = query.join('&');
 
-      // Emit event to clear show in BooksContainer
       this.$root.$emit('clear-show');
 
-      // Check if cache
       const cachedBooks = this.$store.getters.getCachedBooks(queryString);
       if (cachedBooks) {
         this.books = cachedBooks;
@@ -96,16 +107,17 @@ export default class BookSearch extends Vue {
         this.cleanInputs();
         return;
       }
-
+      
       try {
         const response = await axios.get(`https://openlibrary.org/search.json?${queryString}`);
         this.books = response.data.docs;
-        if(this.books.length === 0) {
+        console.log(response.data);
+        this.numFound = response.data.numFound;
+        if (this.books.length === 0) {
           this.isEmpty = true;
         }
         this.isLoading = false;
         this.cleanInputs();
-        // Cache
         this.$store.dispatch("cacheBooks", { query: queryString, books: this.books });
       } catch (err) {
         this.isLoading = false;
@@ -119,18 +131,35 @@ export default class BookSearch extends Vue {
   }
 
   cleanInputs(): void {
-    this.title = '';
-    this.author = '';
-    this.isbn = '';
     this.isTitleValid = true;
     this.isAuthorValid = true;
     this.isIsbnValid = true;
+    this.$nextTick(() => {
+      window.scrollTo(0, 0);
+    });
+  }
+
+  displaySingleBook(book: Book | null): void {
+    this.hidePagination = book != null;
+    console.log(this.hidePagination);
+  }
+
+  prevPage(): void {
+    if (this.page > 1) {
+      this.page--;
+      this.searchBooks();
+    }
+  }
+
+  nextPage(): void {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.searchBooks();
+    }
   }
 }
 </script>
-
 <style scoped>
-
 .invalid {
   border-color: red;
 }
@@ -174,29 +203,27 @@ export default class BookSearch extends Vue {
   gap: 20px;
 }
 
-@media only screen and (max-width: 768px) {
-  .inline {
-    display: block;
-  }
-  .inline form {
-    width: 100%;
-  }
-  
-  .btn-wishlist, .book-search button {
-    margin-bottom: 10px;
-    display: block !important;
-    width: 100%; 
-    padding: 17px 0 10px 0;
-  }
-  
-  .book-search form {
-    display: block;
-    margin-top: 20px;
-  }
-  
-  .book-search input {
-    width: 90%;
-    margin-bottom: 10px;
-  }
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #d6d6d6;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 16px;
 }
 </style>
