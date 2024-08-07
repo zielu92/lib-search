@@ -31,3 +31,7 @@ This project is a simple Single Page Application (SPA) built with Vue.js (versio
     ```bash
     npm run serve
     ```
+
+## Preview
+![alt Preview 1 example](https://github.com/zielu92/lib-search/blob/main/preview/1.png?raw=true)
+![alt Preview 2 example](https://github.com/zielu92/lib-search/blob/main/preview/2.png?raw=true)
