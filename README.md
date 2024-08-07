@@ -1,4 +1,6 @@
-# kodea-lib-app
+# lib-search
+
+## Description 
 
 ## Project setup
 ```

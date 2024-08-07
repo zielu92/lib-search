@@ -8,7 +8,7 @@
       </div>
       <form @submit.prevent="sendPrompt">
         <div>
-          <input type="text" id="prompt" v-model="prompt" placeholder="Enter your question" />
+          <input type="text" id="prompt" :class="{ invalid: !isPromptValid }" v-model="prompt" placeholder="Enter your question" />
         </div>
         <button type="submit" v-if="!isLoading">Send</button>
         <span v-else class="cloud-loader"></span>
@@ -21,14 +21,26 @@
   import axios from 'axios';
   import { Book } from '@/types/Book';
   import { bookContext } from '@/helpers/contextBuilder';
+  import { Validatable } from '@/types/Validatable';
+  import { validate } from '@/helpers/validator';
+
   @Component
   export default class Chat extends Vue {
     @Prop() readonly book!: Book;
     prompt: string = '';
+    isPromptValid = true;
     response: string | null = null;
     isLoading = false;
 
     async sendPrompt() {
+      const promptyValidatable: Validatable = {
+        value: this.prompt,
+        required: true,
+        minLength: 2
+      };
+
+      this.isPromptValid = validate(promptyValidatable);
+      if(this.isPromptValid) {
         this.isLoading = true;
 
         const requestData = {
@@ -53,8 +65,8 @@
             this.response = 'Error communicating with the server.';
             this.isLoading = false;
         }
+      }
     }
-
   }
   </script>
   

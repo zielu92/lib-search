@@ -159,97 +159,94 @@ export default class BookSearch extends Vue {
 }
 </script>
 <style scoped>
-.invalid {
-  border-color: red;
-}
 
-.inline {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.inline form {
-  display: flex;
-  gap: 5px;
-  width: 90%;
-  transition: width 0.3s ease;
-}
-
-.inline form:hover {
-  width: 100%;
-}
-
-.inline form:hover + .btn-wishlist {
-  display: none;
-  transition: width 0.3s ease-in-out;
-}
-
-.book-search input {
-  padding: 15px;
-  width: 100%;
-}
-
-.book-search button {
-  padding: 10px;
-  width: 80%;
-}
-
-.book-search .book-card {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.pagination button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.pagination button:disabled {
-  background-color: #d6d6d6;
-  cursor: not-allowed;
-}
-
-.pagination span {
-  font-size: 16px;
-}
-
-@media only screen and (max-width: 768px) {
   .inline {
-    display: block;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
   }
+
   .inline form {
+    display: flex;
+    gap: 5px;
+    width: 90%;
+    transition: width 0.3s ease;
+  }
+
+  .inline form:hover {
     width: 100%;
   }
-  
-  .btn-wishlist, .book-search button {
-    margin-bottom: 10px;
-    display: block !important;
-    
+
+  .inline form:hover + .btn-wishlist {
+    display: none;
+    transition: width 0.3s ease-in-out;
   }
+
+  .book-search input {
+    padding: 15px;
+    width: 100%;
+  }
+
   .book-search button {
-    width: 100%; 
+    padding: 10px;
+    width: 80%;
   }
-  .book-search form {
-    display: block;
+
+  .book-search .book-card {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     margin-top: 20px;
   }
-  
-  .book-search input {
-    width: 90%;
-    margin-bottom: 10px;
+
+  .pagination button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
   }
-}
+
+  .pagination button:disabled {
+    background-color: #d6d6d6;
+    cursor: not-allowed;
+  }
+
+  .pagination span {
+    font-size: 16px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .inline {
+      display: block;
+    }
+    .inline form {
+      width: 100%;
+    }
+    
+    .btn-wishlist, .book-search button {
+      margin-bottom: 10px;
+      display: block !important;
+      
+    }
+    .book-search button {
+      width: 100%; 
+    }
+    .book-search form {
+      display: block;
+      margin-top: 20px;
+    }
+    
+    .book-search input {
+      width: 90%;
+      margin-bottom: 10px;
+    }
+  }
 </style>
