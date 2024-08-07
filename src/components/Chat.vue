@@ -9,7 +9,7 @@
     <form @submit.prevent="sendPrompt">
       <input type="text" id="prompt" :class="{ invalid: !isPromptValid }" v-model="prompt"
         placeholder="Enter your question" />
-      <button type="submit" v-if="!isLoading">Ask</button>
+      <button type="submit" v-if="!isLoading" class="bg-primary">Ask</button>
       <span v-else class="cloud-loader"></span>
     </form>
   </div>
@@ -106,15 +106,10 @@ export default class Chat extends Vue {
   width: 20%;
   padding: 10px;
   font-size: 16px;
-  background-color: #e1b675;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
-
-.chat form button:hover {
-  background-color: #b08f5e;
 }
 
 .cloud-loader {
