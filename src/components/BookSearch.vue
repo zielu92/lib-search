@@ -2,8 +2,10 @@
   <div class="book-search">
     <div class="inline">
       <form @submit.prevent="searchBooks">
-        <input v-model="title" :class="{ invalid: !isTitleValid && !checkInputs }" type="text" placeholder="Book title" />
-        <input v-model="author" :class="{ invalid: !isAuthorValid && !checkInputs }" type="text" placeholder="Author name" />
+        <input v-model="title" :class="{ invalid: !isTitleValid && !checkInputs }" type="text"
+          placeholder="Book title" />
+        <input v-model="author" :class="{ invalid: !isAuthorValid && !checkInputs }" type="text"
+          placeholder="Author name" />
         <input v-model="isbn" :class="{ invalid: !isIsbnValid && !checkInputs }" type="text" placeholder="ISBN" />
         <button type="submit" class="bg-primary btn-pr br">Search</button>
       </form>
@@ -12,13 +14,14 @@
       </router-link>
     </div>
     <info-alert title="No Results Found" v-if="isEmpty">
-      Sorry, we couldn't find any books matching your search. Please try using different keywords or check your spelling.
+      Sorry, we couldn't find any books matching your search. Please try using different keywords or check your
+      spelling.
     </info-alert>
     <info-alert title="Error" type="error" v-if="error">
       Failed to fetch books. Please try again.
     </info-alert>
     <span class="loader" v-if="isLoading"></span>
-    <books-container v-if="books.length" :books="books" @show="displaySingleBook"/>
+    <books-container v-if="books.length" :books="books" @show="displaySingleBook" />
 
     <div v-if="books.length && !hidePagination" class="pagination">
       <button class="bg-primary" @click="prevPage" :disabled="page === 1">Previous</button>
@@ -27,7 +30,6 @@
     </div>
   </div>
 </template>
-
 
 <script lang="ts">
 import Vue from 'vue';
@@ -108,7 +110,7 @@ export default class BookSearch extends Vue {
         this.cleanInputs();
         return;
       }
-      
+
       try {
         const response = await axios.get(`https://openlibrary.org/search.json?${queryString}`);
         this.books = response.data.docs;
@@ -159,94 +161,97 @@ export default class BookSearch extends Vue {
 }
 </script>
 <style scoped>
+.inline {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
+.inline form {
+  display: flex;
+  gap: 5px;
+  width: 90%;
+  transition: width 0.3s ease;
+}
+
+.inline form:hover {
+  width: 100%;
+}
+
+.inline form:hover+.btn-wishlist {
+  display: none;
+  transition: width 0.3s ease-in-out;
+}
+
+.book-search input {
+  padding: 15px;
+  width: 100%;
+}
+
+.book-search button {
+  padding: 10px;
+  width: 80%;
+}
+
+.book-search .book-card {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #d6d6d6;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 16px;
+}
+
+@media only screen and (max-width: 768px) {
   .inline {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+    display: block;
   }
 
   .inline form {
-    display: flex;
-    gap: 5px;
-    width: 90%;
-    transition: width 0.3s ease;
-  }
-
-  .inline form:hover {
     width: 100%;
   }
 
-  .inline form:hover + .btn-wishlist {
-    display: none;
-    transition: width 0.3s ease-in-out;
-  }
+  .btn-wishlist,
+  .book-search button {
+    margin-bottom: 10px;
+    display: block !important;
 
-  .book-search input {
-    padding: 15px;
-    width: 100%;
   }
 
   .book-search button {
-    padding: 10px;
-    width: 80%;
+    width: 100%;
   }
 
-  .book-search .book-card {
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+  .book-search form {
+    display: block;
     margin-top: 20px;
   }
 
-  .pagination button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  .book-search input {
+    width: 90%;
+    margin-bottom: 10px;
   }
-
-  .pagination button:disabled {
-    background-color: #d6d6d6;
-    cursor: not-allowed;
-  }
-
-  .pagination span {
-    font-size: 16px;
-  }
-
-  @media only screen and (max-width: 768px) {
-    .inline {
-      display: block;
-    }
-    .inline form {
-      width: 100%;
-    }
-    
-    .btn-wishlist, .book-search button {
-      margin-bottom: 10px;
-      display: block !important;
-      
-    }
-    .book-search button {
-      width: 100%; 
-    }
-    .book-search form {
-      display: block;
-      margin-top: 20px;
-    }
-    
-    .book-search input {
-      width: 90%;
-      margin-bottom: 10px;
-    }
-  }
+}
 </style>

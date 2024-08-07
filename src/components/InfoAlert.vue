@@ -4,7 +4,7 @@
         <slot class="alert-slot"></slot>
     </div>
 </template>
-  
+
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
@@ -16,22 +16,22 @@ export default class InfoAlert extends Vue {
 </script>
 
 <style scoped>
-    .alert {
-        color: #292929;
-        padding: 20px;
-        text-align: left;
-        margin-bottom: 10px;
-    }
+.alert {
+    color: #292929;
+    padding: 20px;
+    text-align: left;
+    margin-bottom: 10px;
+}
 
-    h3 {
-        margin-top: 0;
-    }
+h3 {
+    margin-top: 0;
+}
 
-    .info {
-        background-color: rgb(136, 212, 232);
-    }
+.info {
+    background-color: rgb(136, 212, 232);
+}
 
-    .error {
-        background-color: rgb(232, 136, 136);
-    }
+.error {
+    background-color: rgb(232, 136, 136);
+}
 </style>

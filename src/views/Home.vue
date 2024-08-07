@@ -10,8 +10,8 @@ import BookSearch from '@/components/BookSearch.vue';
 
 @Component({
   components: {
-    BookSearch, 
+    BookSearch,
   },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue { }
 </script>

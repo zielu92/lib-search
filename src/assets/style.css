@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
-body{
+body {
   background: #0959a9;
   color: #f9f9f9;
 }
@@ -58,8 +58,9 @@ input {
 
 .btn-back {
   padding: 15px;
-  float:left;
+  float: left;
 }
+
 .clearfix {
   overflow: auto;
 }
@@ -69,7 +70,7 @@ input {
   border: 0;
   cursor: pointer;
   color: #fff;
-  box-shadow: 0 4px 8px rgba(32,160,255,.3);
+  box-shadow: 0 4px 8px rgba(32, 160, 255, .3);
   font-weight: 600;
   border-radius: 3px;
   min-width: 90px;
@@ -96,28 +97,30 @@ input {
   background: #979794;
   box-sizing: border-box;
   position: relative;
-  border-radius:6px;
+  border-radius: 6px;
   perspective: 500px;
 }
 
-.loader:before{
+.loader:before {
   content: '';
   position: absolute;
   left: 10px;
   right: 10px;
   top: 10px;
   bottom: 10px;
-  border-radius:8px;
-  background: #f5f5f5  no-repeat;
+  border-radius: 8px;
+  background: #f5f5f5 no-repeat;
   background-size: 70px 10px;
-  background-image: 	linear-gradient(#ddd 100px, transparent 0) ,
-            linear-gradient(#ddd 100px, transparent 0), 
-            linear-gradient(#ddd 100px, transparent 0);
-  background-position: 15px 30px , 15px 60px , 15px 90px, 
-            105px 30px , 105px 60px , 105px 90px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  background-image: linear-gradient(#ddd 100px, transparent 0),
+    linear-gradient(#ddd 100px, transparent 0),
+    linear-gradient(#ddd 100px, transparent 0);
+  background-position: 15px 30px, 15px 60px, 15px 90px,
+    105px 30px, 105px 60px, 105px 90px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
-.loader:after, .bg-page {
+
+.loader:after,
+.bg-page {
   content: '';
   position: absolute;
   width: calc(50% - 10px);
@@ -127,21 +130,21 @@ input {
   border-radius: 8px;
   background: #fff no-repeat;
   background-size: 70px 10px;
-  background-image: linear-gradient(#ddd 100px, transparent 0), 
-          linear-gradient(#ddd 100px, transparent 0), 
-          linear-gradient(#ddd 100px, transparent 0);
-  background-position: 50% 30px ,50% 60px , 50%  90px;
+  background-image: linear-gradient(#ddd 100px, transparent 0),
+    linear-gradient(#ddd 100px, transparent 0),
+    linear-gradient(#ddd 100px, transparent 0);
+  background-position: 50% 30px, 50% 60px, 50% 90px;
 }
 
 .loader:after {
   animation: paging 1s linear infinite;
-  transform: rotateY(0deg );
+  transform: rotateY(0deg);
   transform-origin: left center;
 }
 
 @keyframes paging {
   to {
-    transform: rotateY( -180deg );
+    transform: rotateY(-180deg);
   }
 }
 
@@ -172,6 +175,7 @@ input {
     left: 0%;
     opacity: 1;
   }
+
   100% {
     left: 60%;
     opacity: 0;
@@ -187,7 +191,8 @@ input {
 @media only screen and (max-width: 768px) {
   .scroll-direction {
     display: block;
-  } 
+  }
+
   .card-grid {
     flex-wrap: nowrap;
     width: 100%;
