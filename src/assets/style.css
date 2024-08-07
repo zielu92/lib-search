@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
-
 body{
   background: #0959a9;
   color: #f9f9f9;
@@ -194,4 +193,12 @@ input {
     width: 100%;
     overflow: scroll;
   }
+}
+
+.footer {
+  padding: 20px;
+}
+
+.footer a {
+  text-decoration: none;
 }
