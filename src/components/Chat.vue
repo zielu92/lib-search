@@ -7,11 +7,9 @@
       <div class="response">{{ response }}</div>
     </div>
     <form @submit.prevent="sendPrompt">
-      <div>
-        <input type="text" id="prompt" :class="{ invalid: !isPromptValid }" v-model="prompt"
-          placeholder="Enter your question" />
-      </div>
-      <button type="submit" v-if="!isLoading">Send</button>
+      <input type="text" id="prompt" :class="{ invalid: !isPromptValid }" v-model="prompt"
+        placeholder="Enter your question" />
+      <button type="submit" v-if="!isLoading">Ask</button>
       <span v-else class="cloud-loader"></span>
     </form>
   </div>
@@ -94,18 +92,18 @@ export default class Chat extends Vue {
 }
 
 .chat form {
-  display: flex;
   flex-direction: column;
 }
 
 .chat form input {
-  width: 70%;
+  width: 60%;
   margin-bottom: 20px;
   padding: 10px;
   font-size: 16px;
 }
 
 .chat form button {
+  width: 20%;
   padding: 10px;
   font-size: 16px;
   background-color: #42b983;
@@ -160,6 +158,12 @@ export default class Chat extends Vue {
   90%,
   100% {
     height: 0px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .chat form button, .chat form input {
+    width: 80%;
   }
 }
 </style>
