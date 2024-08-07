@@ -36,5 +36,5 @@ You need to install ollama locally or use an external one. Configuration can be 
     ```
 
 ## Preview
-![alt Preview 1 example](https://github.com/zielu92/lib-search/blob/main/preview/1.png?raw=true)
-![alt Preview 2 example](https://github.com/zielu92/lib-search/blob/main/preview/2.png?raw=true)
+![alt Preview 1 example](https://github.com/zielu92/lib-search/blob/main/preview/1a.png?raw=true)
+![alt Preview 2 example](https://github.com/zielu92/lib-search/blob/main/preview/2a.png?raw=true)
