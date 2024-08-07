@@ -1,7 +1,7 @@
 <template>
   <div class="book-search">
     <div class="inline">
-      <form @submit.prevent="searchBooks">
+      <form @submit.prevent="searchBooks(true)">
         <input v-model="title" :class="{ invalid: !isTitleValid && !checkInputs }" type="text"
           placeholder="Book title" />
         <input v-model="author" :class="{ invalid: !isAuthorValid && !checkInputs }" type="text"
@@ -67,7 +67,7 @@ export default class BookSearch extends Vue {
     return Math.ceil(this.numFound / this.limit);
   }
 
-  async searchBooks(): Promise<void> {
+  async searchBooks(newSearch: boolean): Promise<void> {
     const titleValidatable: Validatable = {
       value: this.title,
       minLength: 2
@@ -95,6 +95,9 @@ export default class BookSearch extends Vue {
     if (this.isIsbnValid) query.push(`isbn=${this.isbn}`);
 
     if (query.length > 0) {
+      if(newSearch) {
+        this.page = 1;
+      }
       this.books = [];
       this.isLoading = true;
       query.push(`page=${this.page}`);
@@ -148,14 +151,14 @@ export default class BookSearch extends Vue {
   prevPage(): void {
     if (this.page > 1) {
       this.page--;
-      this.searchBooks();
+      this.searchBooks(false);
     }
   }
 
   nextPage(): void {
     if (this.page < this.totalPages) {
       this.page++;
-      this.searchBooks();
+      this.searchBooks(false);
     }
   }
 }
