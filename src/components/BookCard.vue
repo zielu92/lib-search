@@ -150,7 +150,7 @@ export default class BookCard extends Vue {
   right: 5px;
   top: 5px;
   padding: 6px;
-  background-color: #64afd0;
+  background-color: #b1dbfa;
   color: #fff;
   border: none;
 }

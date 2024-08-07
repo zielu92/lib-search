@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 body {
-  background: #0959a9;
+  background: #b1b88e;
   color: #f9f9f9;
 }
 
@@ -41,13 +41,18 @@ input {
 }
 
 .bg-primary {
-  background-color: #4db3ff;
+  background-color: #7d4f23;
   color: #FFF;
+}
+
+.bg-primary:hover {
+  background-color: #583819;
+  box-shadow: none;
 }
 
 .blue-container {
   margin-top: 70px;
-  background-color: #61a4e79f;
+  background-color: #583819;
   border-radius: 20px;
 }
 
@@ -70,23 +75,10 @@ input {
   border: 0;
   cursor: pointer;
   color: #fff;
-  box-shadow: 0 4px 8px rgba(32, 160, 255, .3);
+  box-shadow: 0 4px 8px #472e14;
   font-weight: 600;
   border-radius: 3px;
   min-width: 90px;
-}
-
-.bg-primary:hover {
-  background-color: #2d648e;
-  box-shadow: none;
-}
-
-.bg-secondary {
-  background-color: #FEE440;
-}
-
-.bg-alternative {
-  background-color: #111111;
 }
 
 .loader {

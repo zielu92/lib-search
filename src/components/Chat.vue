@@ -106,7 +106,7 @@ export default class Chat extends Vue {
   width: 20%;
   padding: 10px;
   font-size: 16px;
-  background-color: #42b983;
+  background-color: #e1b675;
   color: white;
   border: none;
   border-radius: 4px;
@@ -114,7 +114,7 @@ export default class Chat extends Vue {
 }
 
 .chat form button:hover {
-  background-color: #339966;
+  background-color: #b08f5e;
 }
 
 .cloud-loader {
