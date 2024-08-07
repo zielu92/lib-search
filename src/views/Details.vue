@@ -9,11 +9,13 @@
       </div>
       <div class="book-details">
         <h1>{{ book.title }}</h1>
-        <p v-if="book.author_name">Author: {{ book.author_name.join(', ') }}</p>
-        <p v-if="book.author_alternative_name && book.author_alternative_name.length">
-          Author alternative names: {{ book.author_alternative_name.join(', ') }}</p>
-        <p v-if="book.first_publish_year">First Published: {{ book.first_publish_year }}</p>
-        <p v-if="book.isbn && book.isbn.length">ISBN: {{ book.isbn.join(', ') }}</p>
+        <div class="tj">
+          <p v-if="book.author_name">Author: {{ book.author_name.join(', ') }}</p>
+          <p v-if="book.author_alternative_name && book.author_alternative_name.length">
+            Author alternative names: {{ book.author_alternative_name.join(', ') }}</p>
+          <p v-if="book.first_publish_year">First Published: {{ book.first_publish_year }}</p>
+          <p v-if="book.isbn && book.isbn.length">ISBN: {{ book.isbn.join(', ') }}</p>
+        </div>
       </div>
     </div>
     <chat v-if="isChatEnabled()" :book="book"></chat>
@@ -45,6 +47,10 @@ export default class BookDetails extends Vue {
 </script>
 
 <style scoped>
+.tj {
+  text-align: justify;
+}
+
 .book-container {
   display: flex;
   flex-direction: row;
