@@ -84,6 +84,8 @@
     cursor: pointer;
   }
 
+
+
   .card:hover {
     transform: scale(1.05);
   }
@@ -99,7 +101,12 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background: linear-gradient(
+      180deg,
+      hsla(0, 0%, 0%, 0) 0%,
+      hsla(0, 0%, 0%, 0.2) 10%,
+      hsl(0, 0%, 0%) 100%
+    );
     color: white;
     box-sizing: border-box;
     text-align: center;
@@ -122,7 +129,9 @@
 
   .card-info .title {
     margin: 10px 0;
+    position: relative;
   }
+
 
   .card-info .more-info, .card-info button, .card-info a {
     display: none;

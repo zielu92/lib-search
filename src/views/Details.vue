@@ -1,20 +1,22 @@
 <template>
     <div v-if="book">
       <button @click="back" class="bg-primary btn-pr btn-back">&lt; Back</button>
+      
       <div class="clearfix"></div>
-      <div class="book-container">
+      <div class="book-container blue-container">
         <div class="book-cover">
             <img :src="coverImageUrl" alt="Book Cover"/>
+          </div>
+          <div class="book-details">
+              <h1>{{ book.title }}</h1>
+              <p v-if="book.author_name">Author: {{ book.author_name.join(', ') }}</p>
+              <p v-if="book.author_alternative_name && book.author_alternative_name.length">
+                Author alternative names: {{ book.author_alternative_name.join(', ') }}</p>
+              <p v-if="book.first_publish_year">First Published: {{ book.first_publish_year }}</p>
+              <p v-if="book.isbn && book.isbn.length">ISBN: {{ book.isbn.join(', ') }}</p>
+          </div>
         </div>
-        <div class="book-details">
-            <h1>{{ book.title }}</h1>
-            <p v-if="book.author_name">Author: {{ book.author_name.join(', ') }}</p>
-            <p v-if="book.author_alternative_name && book.author_alternative_name.length">
-               Author alternative names: {{ book.author_alternative_name.join(', ') }}</p>
-            <p v-if="book.first_publish_year">First Published: {{ book.first_publish_year }}</p>
-            <p v-if="book.isbn && book.isbn.length">ISBN: {{ book.isbn.join(', ') }}</p>
-        </div>
-        </div>
+        <chat v-if="isChatEnabled()" :book="book"></chat>
     </div>
 </template>
   
@@ -24,12 +26,17 @@
     import { Prop } from 'vue-property-decorator';
     import { Book } from '@/types/Book';
     import { coverURL } from '@/helpers/helper';
-
-    @Component
+    import Chat from '@/components/Chat.vue';
+    @Component({
+      components: {Chat},
+    })
     export default class BookDetails extends Vue { 
         @Prop() book!: Book;
         get coverImageUrl(): string {
             return coverURL(this.book.cover_i, this.book.title);
+        }
+        isChatEnabled(): boolean {
+          return process.env.VUE_APP_ENABLE_CHAT || false;
         }
         back() {
             this.$emit('show-details', null);
@@ -42,9 +49,6 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
-    margin-top: 70px;
-    background-color: #61a4e79f;
-    border-radius: 20px;
   }
   
   .book-cover img {

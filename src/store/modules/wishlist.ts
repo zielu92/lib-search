@@ -4,7 +4,7 @@ import { Book } from '@/types/Book';
 import { RootState } from '@/types/RootState'
 import { WishlistState } from '@/types/WishlistState'
 
-const ENCRYPTION_KEY = process.env.KEY_HASH || 'default';
+const ENCRYPTION_KEY = process.env.VUE_APP_KEY_HASH || 'default';
 
 const encryptData = (data: any): string => {
   return CryptoJS.AES.encrypt(JSON.stringify(data), ENCRYPTION_KEY).toString();
