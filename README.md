@@ -14,6 +14,9 @@ This project is a simple Single Page Application (SPA) built with Vue.js (versio
 - **Wishlist Export**: Users can export their current wishlist to a spreadsheet.
 - **LLM Model Interaction**: Users can ask questions about books using an LLM model, with prompts generated based on data from the Open Library search.
 
+## ollama
+You need to install ollama locally or use an external one. Configuration can be done by editing .env file
+
 ## Installation
 
 1. **Clone the Repository**
