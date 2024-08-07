@@ -225,4 +225,31 @@ export default class BookSearch extends Vue {
 .pagination span {
   font-size: 16px;
 }
+
+@media only screen and (max-width: 768px) {
+  .inline {
+    display: block;
+  }
+  .inline form {
+    width: 100%;
+  }
+  
+  .btn-wishlist, .book-search button {
+    margin-bottom: 10px;
+    display: block !important;
+    
+  }
+  .book-search button {
+    width: 100%; 
+  }
+  .book-search form {
+    display: block;
+    margin-top: 20px;
+  }
+  
+  .book-search input {
+    width: 90%;
+    margin-bottom: 10px;
+  }
+}
 </style>
