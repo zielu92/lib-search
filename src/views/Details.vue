@@ -15,6 +15,7 @@
             Author alternative names: {{ book.author_alternative_name.join(', ') }}</p>
           <p v-if="book.first_publish_year">First Published: {{ book.first_publish_year }}</p>
           <p v-if="book.isbn && book.isbn.length">ISBN: {{ book.isbn.join(', ') }}</p>
+          <p v-if="isInWishlist">You have it on your wishlist</p>
         </div>
       </div>
     </div>
@@ -39,6 +40,9 @@ export default class BookDetails extends Vue {
   }
   isChatEnabled(): boolean {
     return process.env.VUE_APP_ENABLE_CHAT || false;
+  }
+  get isInWishlist(): boolean {
+    return this.$store.getters['wishlist/isInWishlist'](this.book.key);
   }
   back() {
     this.$emit('show-details', null);
