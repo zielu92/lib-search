@@ -1,4 +1,4 @@
-# lib-search - Book Search & Wishlist Project with OLLAMA support
+# lib-search - book search & wishlist project with ollama support
 
 ## Description 
 
