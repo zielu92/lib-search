@@ -60,9 +60,9 @@ export default class BookSearch extends Vue {
 
   page: number = 1;
   numFound: number = 0;
-
+  limit = process.env.VUE_APP_RESULTS_LIMIT || 30;
   get totalPages(): number {
-    return Math.ceil(this.numFound / 100);
+    return Math.ceil(this.numFound / this.limit);
   }
 
   async searchBooks(): Promise<void> {
@@ -96,6 +96,7 @@ export default class BookSearch extends Vue {
       this.books = [];
       this.isLoading = true;
       query.push(`page=${this.page}`);
+      query.push(`limit=${this.limit}`);
       const queryString = query.join('&');
 
       this.$root.$emit('clear-show');
